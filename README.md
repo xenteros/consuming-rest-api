@@ -5,9 +5,6 @@ SETUP
 4. Napisz .gitgnore, który wykluczy folder target oraz pliki 
 	IntelliJ'a/Eclipse'a.
 5. Wrzuć projekt na GitHuba,
-
-DEVELOPMENT
-
 6. Dodaj do pom.xml dependencies ze slack #general
 7. Dodaj pakiet service, w którym będzie klasa odpowiedzialna
 	za wysyłanie zapytań i parsowanie ich,
