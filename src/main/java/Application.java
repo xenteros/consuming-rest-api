@@ -11,6 +11,11 @@ public class Application {
         ToDoService toDoService = new ToDoServiceImpl();
         System.out.println(toDoService.healthCheck());
 
-        toDoService.findAllTasksByUser("2").forEach(System.out::println);
+//        toDoService.findAllTasksByUser("2").forEach(System.out::println);
+//        TaskDTO taskDTO = toDoService.createNewTask("Nowa wartość", 1L, false);
+//        System.out.println(taskDTO);
+//        taskDTO.setValue("Po edycji");
+//        System.out.println(toDoService.updateTask(taskDTO));
+        System.out.println(toDoService.deleteTask(1L));
     }
 }

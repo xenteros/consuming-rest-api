@@ -1,6 +1,8 @@
 package service.impl;
 
 import dto.TaskDTO;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -32,5 +34,34 @@ public class ToDoServiceImpl implements ToDoService {
 
         ResponseEntity<TaskDTO[]> response = restTemplate.getForEntity(baseUrl + "/task/all/" + userId, TaskDTO[].class);
         return asList(response.getBody());
+    }
+
+    @Override
+    public TaskDTO createNewTask(String value, Long userId, Boolean completed) {
+
+        TaskDTO taskDTO = new TaskDTO();
+        taskDTO.setCompleted(completed);
+        taskDTO.setUser(userId);
+        taskDTO.setValue(value);
+
+        HttpEntity<TaskDTO> requestBody = new HttpEntity<>(taskDTO);
+
+        ResponseEntity<TaskDTO> response =
+                restTemplate.exchange(baseUrl + "/task", HttpMethod.PUT, requestBody, TaskDTO.class);
+
+        return response.getBody();
+    }
+
+    @Override
+    public TaskDTO updateTask(TaskDTO taskDTO) {
+        return restTemplate.exchange(
+                baseUrl + "/task", HttpMethod.PUT, new HttpEntity<>(taskDTO), TaskDTO.class)
+                .getBody();
+    }
+
+    @Override
+    public boolean deleteTask(Long id) {
+        ResponseEntity<Void> result = restTemplate.exchange(baseUrl + "/task/" + id, HttpMethod.DELETE, null, Void.class);
+        return result.getStatusCode() == HttpStatus.OK;
     }
 }

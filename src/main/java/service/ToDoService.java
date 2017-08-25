@@ -11,5 +11,8 @@ public interface ToDoService {
 
     boolean healthCheck();
     List<TaskDTO> findAllTasksByUser(String userId);
+    TaskDTO createNewTask(String value, Long userId, Boolean completed);
+    TaskDTO updateTask(TaskDTO taskDTO);
+    boolean deleteTask(Long id);
 
 }
